@@ -1,133 +1,94 @@
-# csc-155-group-project
-CSC 155 Group Project
-
-
-CSC155 Group Project Options
-
-This document outlines the pros and cons of our potential project choices, evaluated against the CSC155 course goals. We want to demonstrate mastery of:
-
-Input/Output (cin, cout)
-
-Control structures (loops, decisions)
-
-Arrays and Vectors
-
-Sorting and Searching
-
-Classes with constructors, overloads, and encapsulation (public/private)
-
-Inheritance and Polymorphism
-
-Exception Handling and Robustness
-
-
-1. Grade Manager
-
-Description: An application that tracks students, assignments, and grades. Provides averages, sorting by score, and searching by name or ID.
-
-Pros:
-
-Natural fit for arrays/vectors (storing student or grade records).
-
-Strong use case for searching (find student by ID) and sorting (rank by average).
-
-Easy to design multiple classes (e.g., Student, Course, GradeManager).
-
-Can demonstrate inheritance (e.g., UndergraduateStudent vs. GraduateStudent).
-
-Exception handling for invalid grade input.
-
-Realistic, “practical” application.
-
-Cons:
-
-Data model can get complex (handling multiple students, multiple assignments).
-
-Requires careful planning to avoid overwhelming scope.
-
-User interface (text menus) may get repetitive if not well structured.
-
-
-2. Quiz Application
-
-Description: A program that lets instructors create quizzes and students take them, tracking scores and results.
-
-Pros:
-
-Clear I/O opportunities (questions in, answers out).
-
-Arrays/vectors for storing questions and responses.
-
-Polymorphism possible (different question types: multiple choice, true/false).
-
-Searching/sorting to review high scores or quiz banks.
-
-Natural use of exception handling for invalid input.
-
-Cons:
-
-Requires designing a question bank system — could be challenging.
-
-May overlap heavily with Grade Manager concept (tracking scores).
-
-Needs extra thought to avoid being “too simple” (just Q&A without added features).
-
-
-3. Contact List Manager
-
-Description: A program to add, search, edit, and remove contacts (like a simplified phonebook).
-
-Pros:
-
-Direct fit for arrays/vectors (list of contacts).
-
-Sorting/searching by name, number, or email is very natural.
-
-Classes with encapsulation (Contact with private attributes).
-
-Can implement file input/output for persistence.
-
-Robust exception handling opportunities (duplicate entries, invalid phone numbers).
-
-Cons:
-
-Might feel less “exciting” than games or academic tools.
-
-Inheritance/polymorphism may feel a little forced unless extended (e.g., PersonalContact, BusinessContact).
-
-Simpler overall scope, which could be a strength or weakness.
-
-
-4. Tic-Tac-Toe Game
-
-Description: A console-based game for two players (or vs. computer AI).
-
-Pros:
-
-Fun and visual, engages interest.
-
-Uses arrays/vectors for the game board.
-
-Opportunity for classes (Board, Player, Game).
-
-Can extend with AI (introduces search algorithms).
-
-Exception handling for invalid moves.
-
-Cons:
-
-Sorting/searching less relevant (unless adding a scoreboard).
-
-Inheritance/polymorphism less natural unless extended (e.g., HumanPlayer vs. ComputerPlayer).
-
-Risk of being “too small” unless extra features are added (save/load, multiple game modes, tournament mode).
-
-Recommendation Summary
-
-Grade Manager → Best for showcasing data handling, sorting/searching, and OOP structure. Strong academic feel.
-
-Quiz Application → Good balance of OOP and user interaction, with potential for polymorphism in question types.
-
-Contact List Manager → Cleanest demonstration of encapsulation and searching/sorting. Practical, but simpler scope.
-
-Tic-Tac-Toe → Most engaging, but needs creative extensions to cover sorting/searching and polymorphism.
+# CSC155 Group Project Options
+
+This document outlines the pros and cons of our potential project choices, evaluated against the **CSC155 course goals**. We want to demonstrate mastery of:
+
+- Input/Output (`cin`, `cout`)
+- Control structures (loops, decisions)
+- Arrays and Vectors
+- Sorting and Searching
+- Classes with constructors, overloads, and encapsulation (`public`/`private`)
+- Inheritance and Polymorphism
+- Exception Handling and Robustness
+- File I/O (reading and writing data)
+
+---
+
+## 1. Student Grade Manager
+**Description:** Reads grades from a file, calculates averages, applies letter grades, and writes results to a new file.
+
+**Pros:**
+- Strong use of **file I/O** (reading input, writing results).
+- Great opportunity for **arrays/vectors** to store student scores.
+- Natural place for **searching and sorting** (e.g., sort by average, search by student).
+- Classes can represent `Student` and `GradeManager`.
+- Exception handling for bad data (non-numeric input, missing files).
+- Practical and academic application.
+
+**Cons:**
+- Heavy focus on file processing might overshadow gameplay-style creativity.
+- Inheritance/polymorphism needs to be designed carefully (e.g., different student types).
+- Can become complex if too many features are added.
+
+---
+
+## 2. Tic-Tac-Toe Game
+**Description:** A 2-player console game using arrays, win detection logic, and replay option.
+
+**Pros:**
+- Fun and interactive.
+- Uses **arrays** to represent the game board.
+- Opportunity for **classes** like `Board`, `Player`, and `Game`.
+- Exception handling for invalid moves (e.g., overwriting a taken square).
+- Replay option shows control structures and looping.
+
+**Cons:**
+- **Sorting/searching** less relevant (unless extended with leaderboard/score history).
+- Inheritance/polymorphism is not obvious (unless extended with `HumanPlayer` vs. `AIPlayer`).
+- Risk of being too small unless additional features (AI, tournament mode, saving scores) are added.
+
+---
+
+## 3. Contact List Manager
+**Description:** Stores, searches, and sorts contacts with file I/O for persistent storage.
+
+**Pros:**
+- Strong use of **arrays/vectors** for managing contacts.
+- Natural application of **searching and sorting** (by name, phone, or email).
+- File I/O for persistence (save/load contact lists).
+- Classes with encapsulation (`Contact` class with private data).
+- Exception handling for duplicate entries or invalid formats.
+
+**Cons:**
+- Could feel less engaging compared to a game.
+- Inheritance/polymorphism may need extensions (e.g., `BusinessContact` vs. `PersonalContact`).
+- Simpler scope than Grade Manager or Quiz Application.
+
+---
+
+## 4. Quiz Application
+**Description:** Randomly selects and displays multiple-choice questions, tracks score, and saves results.
+
+**Pros:**
+- Strong use of **I/O** (input for answers, output for results).
+- Uses **arrays/vectors** for questions and answers.
+- Opportunity for **classes** like `Question`, `Quiz`, `Result`.
+- Polymorphism possible with different question types (`TrueFalseQuestion`, `MultipleChoiceQuestion`).
+- Exception handling for invalid input (e.g., selecting an option that doesn’t exist).
+- File I/O for saving quiz results.
+
+**Cons:**
+- Requires designing a **question bank system** (random selection logic).
+- Similar in concept to Grade Manager (tracking performance data).
+- Needs extra thought to scale beyond just a basic Q&A loop.
+
+---
+
+## Recommendation Summary
+- **Student Grade Manager** → Best fit for *file I/O, sorting/searching, and academic structure*.  
+- **Tic-Tac-Toe** → Most engaging, but requires feature extensions for full CSC155 coverage.  
+- **Contact List Manager** → Clean, practical, strong fit for *encapsulation and file I/O*, but lighter on polymorphism.  
+- **Quiz Application** → Balanced option with *OOP, polymorphism, and file I/O*, but needs careful question bank design.  
+
+---
+
+✅ If our goal is **robustness + coverage of all CSC155 concepts**, the **Student Grade Manager** or **Quiz Application** will likely give us the richest opportunities.  

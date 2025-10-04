@@ -92,3 +92,92 @@ This document outlines the pros and cons of our potential project choices, evalu
 ---
 
 ✅ If our goal is **robustness + coverage of all CSC155 concepts**, the **Student Grade Manager** or **Quiz Application** will likely give us the richest opportunities.  
+
+
+# Tic-Tac-Toe: Game Rules and Logic Overview
+
+## 🎯 Objective
+Tic-Tac-Toe is a 2-player, turn-based game played on a **3×3 grid**.  
+Players take turns marking empty squares with their symbol — either **X** or **O**.  
+The goal is to be the **first to get three of your symbols in a row** (horizontally, vertically, or diagonally).
+
+---
+
+## 🧩 Game Rules
+
+1. **Board Setup**
+   - The game board is a 3×3 grid.
+   - Each cell can be empty, contain an `X`, or contain an `O`.
+   - In C++, this can be stored using:
+     - A 2D array: `char board[3][3];`
+     - Or a vector: `vector<vector<char>> board(3, vector<char>(3, ' '));`
+
+2. **Player Turns**
+   - There are two players: **Player 1 (X)** and **Player 2 (O)**.
+   - By convention, **Player 1 (X)** always goes first.
+   - Players alternate turns, each choosing one empty cell to mark with their symbol.
+   - Input can be taken as row/column numbers (e.g., row 1, column 2).
+
+3. **Move Validation**
+   - A player cannot place a symbol on an already occupied space.
+   - Invalid inputs should trigger **error messages** and a chance to re-enter.
+   - This is a good spot to demonstrate **exception handling**.
+
+4. **Winning Conditions**
+   A player wins if they have **three of their symbols in a row** in any of these patterns:
+   - **Rows:** all symbols in a row are the same.
+     - `(0,0), (0,1), (0,2)` or `(1,0), (1,1), (1,2)` or `(2,0), (2,1), (2,2)`
+   - **Columns:** all symbols in a column are the same.
+     - `(0,0), (1,0), (2,0)` or `(0,1), (1,1), (2,1)` or `(0,2), (1,2), (2,2)`
+   - **Diagonals:** all symbols match on either diagonal.
+     - `(0,0), (1,1), (2,2)` or `(0,2), (1,1), (2,0)`
+
+   After every turn, check these conditions to determine if a player has won.
+
+5. **Tie (Draw) Conditions**
+   - If all nine cells are filled and **no winning condition** is met, the game ends in a **tie**.
+   - You can check for a tie after verifying no winner and counting filled spaces.
+
+6. **Game End**
+   - Once a winner or tie is detected, display a message like:
+     - `"Player X wins!"`
+     - `"Player O wins!"`
+     - `"It’s a tie!"`
+   - Then offer the **replay option**.
+
+---
+
+## 🔁 Replay Option
+After the end of each game:
+
+1. Ask the user:  
+   `"Would you like to play again? (Y/N): "`
+2. If the answer is `Y` or `y`:
+   - Clear and reinitialize the board.
+   - Switch which player starts (optional feature).
+   - Begin a new game loop.
+3. If the answer is `N` or `n`:
+   - Exit the program gracefully with a thank-you message.
+
+---
+
+## ⚙️ Suggested Program Flow (Pseudocode)
+
+```cpp
+initializeBoard();
+
+do {
+    currentPlayer = 'X';
+    while (!gameOver) {
+        displayBoard();
+        getPlayerMove(currentPlayer);
+        updateBoard(currentPlayer);
+        checkWinnerOrTie();
+        switchPlayer();
+    }
+
+    displayResult();
+    askReplay();
+
+} while (userWantsReplay);
+'''

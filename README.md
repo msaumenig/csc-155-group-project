@@ -181,58 +181,50 @@ do {
 
 } while (userWantsReplay);
 ```
-Tic Tac Toe – Improvement Overview
 
-This document outlines planned improvements and design enhancements for the CSC 155 Tic Tac Toe Project.
+# Tic Tac Toe – Improvement Overview
+
+This document outlines planned improvements and design enhancements for the CSC 155 Tic Tac Toe Project.  
 The current implementation is functional and object-oriented but can be expanded for better usability, smarter logic, and clearer structure.
 
- Overview of Improvement Areas
+---
 
-1.  User Interface Enhancements (Usability & Presentation)
+##  Overview of Improvement Areas
 
-CSC 155 Principles: Input validation, output formatting, and user experience.
+###  User Interface Enhancements (Usability & Presentation)
 
-Goals:
+**CSC 155 Principles:** Input validation, output formatting, and user experience.
 
-Improve the console interface for a smoother gameplay experience.
+**Goals**
+- Improve the console interface for a smoother gameplay experience.
+- Provide clearer prompts and more intuitive board visualization.
+- Reduce clutter and repetitive messages.
 
-Provide clearer prompts and more intuitive board visualization.
+**Ideas**
+- **Colorized Output:** Use ANSI escape codes to color X’s and O’s (e.g., X = red, O = blue).
+- **Dynamic Refresh:** Clear the screen each turn using `system("clear")` (Linux/macOS) or `system("CLS")` (Windows).
+- **Better Prompts:** Clearly display player names, symbols, and whose turn it is.
+- **Status Line:** Show the current score (wins, losses, draws) after each round.
+- **Flexible Input:** Accept moves as either `"1 2"` or `"A3"`, handling both formats gracefully.
 
-Reduce clutter and repetitive messages.
+---
 
-Ideas:
+### 🧠 Smarter Draw Detection (Game Logic Enhancement)
 
-Colorized Output: Use ANSI escape codes to color X’s and O’s (e.g., X = red, O = blue).
+**CSC 155 Principles:** Algorithm design, logical reasoning, and conditional structures.
 
-Dynamic Refresh: Clear the screen each turn using system("clear") (Linux/macOS) or system("CLS") (Windows).
+The current implementation declares a draw only when the board is full.  
+The goal is to enhance the logic so the game can detect when no remaining moves can lead to a win for either player (a strategic draw).
 
-Better Prompts: Clearly display player names, symbols, and whose turn it is.
+**Conceptual Steps**
+1. For every empty cell:
+   - Temporarily place an `'X'` and check if it would result in a win.
+   - Temporarily place an `'O'` and check if it would result in a win.
+   - Restore the cell.
+2. If no possible winning paths remain, declare a draw.
 
-Status Line: Show the current score (wins, losses, draws) after each round.
-
-Flexible Input: Accept moves as either "1 2" or "A3", handling both formats gracefully.
-
-2. Smarter Draw Detection (Game Logic Enhancement)
-
-CSC 155 Principles: Algorithm design, logical reasoning, and conditional structures.
-
-The current implementation declares a draw only when the board is full.
-The goal is to enhance the logic so the game can detect when no remaining moves can lead to a win for either player (a “strategic draw”).
-
-Conceptual Steps:
-
-For every empty cell:
-
-Temporarily place an 'X' and check if it would result in a win.
-
-Temporarily place an 'O' and check if it would result in a win.
-
-Restore the cell.
-
-If no possible winning paths remain, declare a draw.
-
-Example Implementation:
-
+**Example Implementation**
+```cpp
 bool isForcedDraw() const {
     for (int i = 0; i < 3; ++i)
         for (int j = 0; j < 3; ++j)
@@ -246,35 +238,31 @@ bool isForcedDraw() const {
     return true;
 }
 
+```
+#Integration 
 
-Integration:
-
+```cpp
 if (board.isForcedDraw()) {
     cout << "No possible winning paths remain — it's a strategic draw!\n";
     draws++;
     gameOver = true;
 }
+```
 
-3. Object-Oriented Refinements
+# Object-Oriented Refinements
 
-CSC 155 Principles: Encapsulation, abstraction, and class design.
+##CSC 155 Principles: Encapsulation, abstraction, and class design.
 
-Proposed Improvements:
+###Proposed Improvements
 
-Separate UI from Logic: Move input/output to a dedicated GameUI class.
+-Separate UI from Logic: Move input/output to a dedicated GameUI class.
+-Encapsulate Stats: Use a Scoreboard class to manage wins, losses, and draws cleanly.
 
-Add a Move Struct: Encapsulate (row, col) for future AI or logging use.
-
-Encapsulate Stats: Use a Scoreboard class to manage wins, losses, and draws cleanly.
-
-4.  Error Handling and Input Validation
+#Error Handling and Input Validation
 
 CSC 155 Principles: Exception handling and robust user interaction.
 
-Goals:
+Goals
 
-Improve feedback for invalid coordinates and occupied cells.
-
-Allow players to choose custom names and symbols (validated to avoid duplicates).
-
-Handle unexpected inputs gracefully with try/catch blocks and clear messages.
+-Improve feedback for invalid coordinates and occupied cells.
+-Handle unexpected inputs gracefully with try/catch blocks and clear messages.

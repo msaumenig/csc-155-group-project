@@ -180,58 +180,58 @@ do {
     askReplay();
 
 } while (userWantsReplay);
+```
+Tic Tac Toe – Improvement Overview
 
-🧩 Overview of Improvement Areas
-1. User Interface Enhancements (Usability & Presentation)
+This document outlines planned improvements and design enhancements for the CSC 155 Tic Tac Toe Project.
+The current implementation is functional and object-oriented but can be expanded for better usability, smarter logic, and clearer structure.
+
+ Overview of Improvement Areas
+
+1.  User Interface Enhancements (Usability & Presentation)
 
 CSC 155 Principles: Input validation, output formatting, and user experience.
 
 Goals:
 
-Make the console output more visually appealing and user-friendly.
+Improve the console interface for a smoother gameplay experience.
 
-Provide clear prompts and visual separation between turns.
+Provide clearer prompts and more intuitive board visualization.
 
-Reduce clutter and repetitive text.
+Reduce clutter and repetitive messages.
 
 Ideas:
 
 Colorized Output: Use ANSI escape codes to color X’s and O’s (e.g., X = red, O = blue).
 
-Dynamic Refresh: Clear the screen before reprinting the board each turn (system("clear") or system("CLS")).
+Dynamic Refresh: Clear the screen each turn using system("clear") (Linux/macOS) or system("CLS") (Windows).
 
-Better Prompts: Display the player name, round number, and symbol more clearly.
+Better Prompts: Clearly display player names, symbols, and whose turn it is.
 
-Status Line: Add a top or bottom line showing current score and whose turn it is.
+Status Line: Show the current score (wins, losses, draws) after each round.
 
-Improved Input Handling: Allow the user to type moves as "1 2" or "A3", handling both gracefully.
+Flexible Input: Accept moves as either "1 2" or "A3", handling both formats gracefully.
 
 2. Smarter Draw Detection (Game Logic Enhancement)
 
-CSC 155 Principles: Algorithm design, logical reasoning, conditional structures.
+CSC 155 Principles: Algorithm design, logical reasoning, and conditional structures.
 
-Currently, your draw check only determines if the board is full:
+The current implementation declares a draw only when the board is full.
+The goal is to enhance the logic so the game can detect when no remaining moves can lead to a win for either player (a “strategic draw”).
 
-bool isDraw() const {
-    for (...) if (board[i][j] == ' ') return false;
-    return true;
-}
-
-
-Improved Goal:
-Detect a “strategic draw” before the board is full — that is, determine if no remaining moves can possibly result in a win for either player.
-
-Conceptual Steps (Pseudocode):
+Conceptual Steps:
 
 For every empty cell:
 
-Temporarily place an ‘X’, check if isWin('X').
+Temporarily place an 'X' and check if it would result in a win.
 
-Temporarily place an ‘O’, check if isWin('O').
+Temporarily place an 'O' and check if it would result in a win.
 
 Restore the cell.
 
-If no possible win is found for either player, declare a draw.
+If no possible winning paths remain, declare a draw.
+
+Example Implementation:
 
 bool isForcedDraw() const {
     for (int i = 0; i < 3; ++i)
@@ -248,7 +248,6 @@ bool isForcedDraw() const {
 
 
 Integration:
-In the game loop:
 
 if (board.isForcedDraw()) {
     cout << "No possible winning paths remain — it's a strategic draw!\n";
@@ -260,31 +259,22 @@ if (board.isForcedDraw()) {
 
 CSC 155 Principles: Encapsulation, abstraction, and class design.
 
-Separate UI and Logic: Move input/output out of GameBoard and into a GameUI helper class.
+Proposed Improvements:
 
-Add a Move struct: Encapsulate (row, col) and support future enhancements (like AI decisions).
+Separate UI from Logic: Move input/output to a dedicated GameUI class.
 
-Encapsulate Stats: Create a Scoreboard class to track wins, losses, and draws cleanly.
+Add a Move Struct: Encapsulate (row, col) for future AI or logging use.
 
-4. Error Handling and Input Validation
+Encapsulate Stats: Use a Scoreboard class to manage wins, losses, and draws cleanly.
 
-CSC 155 Principles: Exception handling, robust user interaction.
+4.  Error Handling and Input Validation
 
-Improve feedback for invalid coordinates or symbols.
+CSC 155 Principles: Exception handling and robust user interaction.
 
-Allow players to re-enter names and symbols at start (with validation for duplicates).
+Goals:
 
-5. Optional Advanced Extensions
+Improve feedback for invalid coordinates and occupied cells.
 
-CSC 155 Principles: Algorithm design, control structures, and data structures.
+Allow players to choose custom names and symbols (validated to avoid duplicates).
 
-AI Opponent: Implement a simple “computer” player using:
-
-Random moves for beginners, or
-
-The minimax algorithm for unbeatable AI.
-
-Custom Board Size: Let users select an n×n grid (requires dynamic arrays or vector<vector<char>>).
-
-Game History: Log moves to a file (introduces file I/O concepts).
-
+Handle unexpected inputs gracefully with try/catch blocks and clear messages.

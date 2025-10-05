@@ -91,19 +91,19 @@ This document outlines the pros and cons of our potential project choices, evalu
 
 ---
 
-✅ If our goal is **robustness + coverage of all CSC155 concepts**, the **Student Grade Manager** or **Quiz Application** will likely give us the richest opportunities.  
+If our goal is **robustness + coverage of all CSC155 concepts**, the **Student Grade Manager** or **Quiz Application** will likely give us the richest opportunities.  
 
 
 # Tic-Tac-Toe: Game Rules and Logic Overview
 
-## 🎯 Objective
+## Objective
 Tic-Tac-Toe is a 2-player, turn-based game played on a **3×3 grid**.  
 Players take turns marking empty squares with their symbol — either **X** or **O**.  
 The goal is to be the **first to get three of your symbols in a row** (horizontally, vertically, or diagonally).
 
 ---
 
-## 🧩 Game Rules
+## Game Rules
 
 1. **Board Setup**
    - The game board is a 3×3 grid.
@@ -209,7 +209,7 @@ The current implementation is functional and object-oriented but can be expanded
 
 ---
 
-### 🧠 Smarter Draw Detection (Game Logic Enhancement)
+### Smarter Draw Detection (Game Logic Enhancement)
 
 **CSC 155 Principles:** Algorithm design, logical reasoning, and conditional structures.
 
@@ -249,16 +249,20 @@ if (board.isForcedDraw()) {
 }
 ```
 
+---
+
 # Object-Oriented Refinements
 
-##CSC 155 Principles: Encapsulation, abstraction, and class design.
+#CSC 155 Principles: Encapsulation, abstraction, and class design.
 
-###Proposed Improvements
+# Proposed Improvements
 
 -Separate UI from Logic: Move input/output to a dedicated GameUI class.
 -Encapsulate Stats: Use a Scoreboard class to manage wins, losses, and draws cleanly.
 
-#Error Handling and Input Validation
+---
+
+# Error Handling and Input Validation
 
 CSC 155 Principles: Exception handling and robust user interaction.
 

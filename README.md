@@ -181,3 +181,110 @@ do {
 
 } while (userWantsReplay);
 
+🧩 Overview of Improvement Areas
+1. User Interface Enhancements (Usability & Presentation)
+
+CSC 155 Principles: Input validation, output formatting, and user experience.
+
+Goals:
+
+Make the console output more visually appealing and user-friendly.
+
+Provide clear prompts and visual separation between turns.
+
+Reduce clutter and repetitive text.
+
+Ideas:
+
+Colorized Output: Use ANSI escape codes to color X’s and O’s (e.g., X = red, O = blue).
+
+Dynamic Refresh: Clear the screen before reprinting the board each turn (system("clear") or system("CLS")).
+
+Better Prompts: Display the player name, round number, and symbol more clearly.
+
+Status Line: Add a top or bottom line showing current score and whose turn it is.
+
+Improved Input Handling: Allow the user to type moves as "1 2" or "A3", handling both gracefully.
+
+2. Smarter Draw Detection (Game Logic Enhancement)
+
+CSC 155 Principles: Algorithm design, logical reasoning, conditional structures.
+
+Currently, your draw check only determines if the board is full:
+
+bool isDraw() const {
+    for (...) if (board[i][j] == ' ') return false;
+    return true;
+}
+
+
+Improved Goal:
+Detect a “strategic draw” before the board is full — that is, determine if no remaining moves can possibly result in a win for either player.
+
+Conceptual Steps (Pseudocode):
+
+For every empty cell:
+
+Temporarily place an ‘X’, check if isWin('X').
+
+Temporarily place an ‘O’, check if isWin('O').
+
+Restore the cell.
+
+If no possible win is found for either player, declare a draw.
+
+bool isForcedDraw() const {
+    for (int i = 0; i < 3; ++i)
+        for (int j = 0; j < 3; ++j)
+            if (board[i][j] == ' ') {
+                board[i][j] = 'X';
+                if (isWin('X')) { board[i][j] = ' '; return false; }
+                board[i][j] = 'O';
+                if (isWin('O')) { board[i][j] = ' '; return false; }
+                board[i][j] = ' ';
+            }
+    return true;
+}
+
+
+Integration:
+In the game loop:
+
+if (board.isForcedDraw()) {
+    cout << "No possible winning paths remain — it's a strategic draw!\n";
+    draws++;
+    gameOver = true;
+}
+
+3. Object-Oriented Refinements
+
+CSC 155 Principles: Encapsulation, abstraction, and class design.
+
+Separate UI and Logic: Move input/output out of GameBoard and into a GameUI helper class.
+
+Add a Move struct: Encapsulate (row, col) and support future enhancements (like AI decisions).
+
+Encapsulate Stats: Create a Scoreboard class to track wins, losses, and draws cleanly.
+
+4. Error Handling and Input Validation
+
+CSC 155 Principles: Exception handling, robust user interaction.
+
+Improve feedback for invalid coordinates or symbols.
+
+Allow players to re-enter names and symbols at start (with validation for duplicates).
+
+5. Optional Advanced Extensions
+
+CSC 155 Principles: Algorithm design, control structures, and data structures.
+
+AI Opponent: Implement a simple “computer” player using:
+
+Random moves for beginners, or
+
+The minimax algorithm for unbeatable AI.
+
+Custom Board Size: Let users select an n×n grid (requires dynamic arrays or vector<vector<char>>).
+
+Game History: Log moves to a file (introduces file I/O concepts).
+
